@@ -19,7 +19,7 @@ def generate_car(car_list, img_path, last_spawn_time):
             car_rect.topleft = (center_lane - 25 , -new_height) 
         elif lane == right_lane:
             car_rect.topleft = (right_lane - 25, -new_height) 
-        car_speed = 6
+        car_speed = random.uniform(4, 10)
         car_list.append((scaled_img, car_rect, car_speed))
         return current_time
     

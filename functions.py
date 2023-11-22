@@ -1,4 +1,4 @@
-import pygame, json
+import pygame, json, time
 from basic_variables import *
 
 def draw_hearts(screen, lives):
@@ -13,33 +13,22 @@ def explode_effect(player_rect):
     pygame.time.delay(1000) 
     explosion_sound.play()
 
-def load_max_score():
+def draw_text(screen, text, font, text_col, x, y):
     """
-    Carga el puntaje máximo almacenado en un archivo JSON.
-
-    Retorna:
-    El puntaje máximo cargado desde el archivo JSON, o 0 si el archivo no existe.
-    """
-    try:
-        with open('max_score.json', 'r') as file:
-            data = json.load(file)
-            return data["max_score"]
-    except FileNotFoundError:
-        return 0
-
-def save_max_score(max_score):
-    """
-    Guarda el puntaje máximo en un archivo JSON.
-
+    Dibuja texto en una superficie de pantalla con la fuente y color especificados.
     Parámetros:
-    - max_score (int): El puntaje máximo que se desea guardar en el archivo.
+    - screen (pygame.Surface): La superficie de pantalla en la que se dibujará el texto.
+    - text (str): El texto que se desea mostrar en la pantalla.
+    - font (pygame.font.Font): La fuente que se utilizará para renderizar el texto.
+    - text_col (tuple): El color del texto representado como una tupla (R, G, B) o (R, G, B, A).
+    - x (int): La coordenada x en la que se dibujará el texto en la superficie de pantalla.
+    - y (int): La coordenada y en la que se dibujará el texto en la superficie de pantalla.
 
     Retorna:
     Ninguno (None)
+
+    Esta función renderiza el texto en la fuente especificada y lo coloca en la posición (x, y)
+    en la superficie de pantalla, utilizando el color de texto proporcionado.
     """
-    data = {"max_score": max_score}
-    try:
-        with open('max_score.json', 'w') as file:
-            json.dump(data, file)
-    except Exception as e:
-        print(f"Error al guardar el puntaje máximo: {e}")
+    img = font.render(text, True, text_col)
+    screen.blit(img, (x,y))

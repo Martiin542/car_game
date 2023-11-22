@@ -1,4 +1,5 @@
 import pygame
+from basic_variables import *
 def button(screen, x, y, image, scale):
     """
     Crea un botón gráfico en una superficie de pantalla.
@@ -29,6 +30,7 @@ def button(screen, x, y, image, scale):
     if rect.collidepoint(mouse_pos):
         if pygame.mouse.get_pressed()[0] == 1 and clicked == False:
             clicked = True
+            select_sound.play()
     
     if pygame.mouse.get_pressed()[0] == 0:
         clicked = False

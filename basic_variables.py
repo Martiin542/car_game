@@ -1,4 +1,5 @@
 import pygame
+from score import load_max_score
 
 pygame.init()
 pygame.mixer.init()
@@ -13,8 +14,13 @@ timer = pygame.time.Clock()
 
 #estados del juego
 main_menu = False
-game_paused = False
-game_over = False
+game_paused = True
+game_over = True
+
+#fuentes y texto
+font_game_over = pygame.font.SysFont('arialblack', 40)
+font_score = pygame.font.SysFont('arialblack', 25)
+TEXT_COL = (50, 50, 50)
 
 #Road
 road = (100, 0, 300, SCREEN_H)
@@ -44,7 +50,8 @@ scaled_img = pygame.transform.scale(car_image, (new_width, new_height))
 player_rect = scaled_img.get_rect()
 player_rect.topleft = (230, 400)
 score = 0
-score_timer = 0
+score_timer = pygame.time.get_ticks()
+max_score = load_max_score()
 
 #enmeys
 car_images = [
@@ -71,5 +78,16 @@ explosion_width, explosion_height = 100, 100
 explosion_image = pygame.transform.scale(explosion_image, (explosion_width, explosion_height))
 explosion_sound = pygame.mixer.Sound('assets\\sound_explosion.mp3')
 explosion_sound.set_volume(0.5)
+
+#meunu
+background_image = pygame.image.load('assets\\logo_juego.jpg')
+background_image = pygame.transform.scale(background_image, (SCREEN_W, SCREEN_H))
+select_sound = pygame.mixer.Sound('assets\\sound_select.mp3')
+select_sound.set_volume(0.8)
+
+#main game 
+song = pygame.mixer.Sound('assets\\song.mp3')
+mute_song = False
+song.set_volume(0.01)
 
 
